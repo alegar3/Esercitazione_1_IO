@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <cmath>
+#include <iomanip>
 
 double traslodilatazione_da_ab_a_cd(double n, double a, double b, double c, double d){
 	
@@ -27,21 +28,29 @@ int main()
 	
 	std:: ifstream filein(namein);
 	std:: ofstream fileout(nameout);
+	
+	
 	if (filein.fail())
 	{
 		std::cerr << "non si apre data.txt" << std::endl;
 		return 1;
 	}
+	if (fileout.fail())
+	{
+		std::cerr << "impossibile creare result.txt" << std::endl;
+		return 1;
+	}
+	fileout << "# N Mean" << std::endl;
+	fileout << std::scientific << std::setprecision(16);
 	
 	std::string linea;
-	std::getline(filein, linea);
 	
 	double a = 1;
 	double b = 5;	
 	double c = -1;
 	double d = 2;
 	
-	int contatore = 1;
+	int contatore = 0;
 	double somma = 0;
 	while (std::getline(filein,linea)){
 		std::stringstream ss;
